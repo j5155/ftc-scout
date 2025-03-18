@@ -21,7 +21,7 @@ async function makeRequest(url: string): Promise<any | null> {
     }
 }
 
-export const throttledMakeRequest = throttled(makeRequest, 250);
+export const throttledMakeRequest = throttled(makeRequest, 100);
 
 export async function getFromFtcApi(path: string, params: Record<string, any> = {}) {
     let paramsString = Object.entries(params)

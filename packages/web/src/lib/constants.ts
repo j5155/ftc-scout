@@ -1,4 +1,4 @@
-export const IS_PROD = process.env.NODE_ENV === "production";
+export const IS_PROD = true; //process.env.NODE_ENV === "production";
 export const IS_DEV = !IS_PROD;
 
 // dark mode settings
