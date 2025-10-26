@@ -6,6 +6,7 @@ import { AllianceScores2021TradFtcApi } from "./MatchScores2021Trad";
 import { AllianceScores2022TradFtcApi } from "./MatchScores2022Trad";
 import { AllianceScores2023TradFtcApi } from "./MatchScores2023Trad";
 import { AllianceScores2024TradFtcApi } from "./MatchScores2024Trad";
+import { AllianceScores2025TradFtcApi } from "./MatchScores2025Trad";
 
 export interface TradTopLevel<AllianceScore> {
     matchLevel: "OTHER" | "QUALIFICATION" | "SEMIFINAL" | "FINAL" | "PLAYOFF";
@@ -23,6 +24,7 @@ export interface RemoteTopLevel<Score> {
 
 // HELP: Season Specific
 export type MatchScoresFtcApi =
+    | TradTopLevel<AllianceScores2025TradFtcApi>
     | TradTopLevel<AllianceScores2024TradFtcApi>
     | TradTopLevel<AllianceScores2023TradFtcApi>
     | TradTopLevel<AllianceScores2022TradFtcApi>
