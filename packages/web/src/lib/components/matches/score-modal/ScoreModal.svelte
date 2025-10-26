@@ -14,7 +14,7 @@
     import RemoteScores from "./RemoteScores.svelte";
     import TradScores from "./TradScores.svelte";
     import { writable, type Writable } from "svelte/store";
-    import { ALL_SEASONS, type Season } from "@ftc-scout/common";
+    import { ALL_SEASONS, type Season, TournamentLevel } from "@ftc-scout/common";
 
     export let shown = false;
     export let match: FullMatchFragment | null = null;
@@ -25,13 +25,16 @@
     $: trad = scores != null && "red" in scores ? (scores as TradScoresTy) : null;
     $: remote = scores != null && !("red" in scores) ? (scores as RemoteScoresTy) : null;
 
-    $: worlds = match?.eventCode.startsWith("FTCCMP1")? true : false;
-    $: division = match?.eventCode.slice(-4)
+    $: worlds = match?.eventCode.startsWith("FTCCMP1") ? true : false;
+    $: division = match?.eventCode.slice(-4);
     $: matchtype =
-            match?.eventCode == "FTCCMP1"? "f" :
-            match?.tournamentLevel == TournamentLevel.Quals? "q" :
-            match?.tournamentLevel == TournamentLevel.DoubleElim? "p" :
-            "aaaaaaaaaaaa" // fallback, should never get here
+        match?.eventCode == "FTCCMP1"
+            ? "f"
+            : match?.tournamentLevel == TournamentLevel.Quals
+            ? "q"
+            : match?.tournamentLevel == TournamentLevel.DoubleElim
+            ? "p"
+            : "aaaaaaaaaaaa"; // fallback, should never get here
 
     let dispatch = createEventDispatcher();
 </script>
@@ -47,8 +50,16 @@
     >
         {#if worlds}
             <!-- svelte-ignore a11y-media-has-caption -->
-            <video preload="none" poster="https://2025worldsclips.reduxrobotics.com/{division}-{matchtype}{match.matchNum}-01.png" controls style="width: 100%; max-height: 60vh">
-                <source type="video/mp4" src="https://2025worldsclips.reduxrobotics.com/{division}-{matchtype}{match.matchNum}-01.mp4" />
+            <video
+                preload="none"
+                poster="https://2025worldsclips.reduxrobotics.com/{division}-{matchtype}{match.matchNum}-01.png"
+                controls
+                style="width: 100%; max-height: 60vh"
+            >
+                <source
+                    type="video/mp4"
+                    src="https://2025worldsclips.reduxrobotics.com/{division}-{matchtype}{match.matchNum}-01.mp4"
+                />
             </video>
         {/if}
         {#if trad}

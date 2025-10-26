@@ -1,0 +1,15 @@
+[Unit]
+Description=FTCScout Web
+After=network.target
+Wants=network-online.target
+
+[Service]
+Restart=always
+Type=simple
+ExecStart=/home/ubuntu/dev/ftc-scout/startweb.sh
+WorkingDirectory=/home/ubuntu/dev/ftc-scout
+User=ubuntu
+Environment=
+
+[Install]
+WantedBy=multi-user.target 
